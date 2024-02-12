@@ -1,9 +1,14 @@
-import classNames from "classnames"
-import { useRef } from "react"
-import { InputCheckboxComponent } from "./types"
+import classNames from "classnames";
+import { useRef } from "react";
+import { InputCheckboxComponent } from "./types";
 
-export const InputCheckbox: InputCheckboxComponent = ({ id, checked = false, disabled, onChange }) => {
-  const { current: inputId } = useRef(`KaizntreeInputCheckbox-${id}`)
+export const InputCheckbox: InputCheckboxComponent = ({
+  id,
+  checked = false,
+  disabled,
+  onChange,
+}) => {
+  const { current: inputId } = useRef(`KaizntreeInputCheckbox-${id}`);
 
   return (
     <div className="KaizntreeInputCheckbox--container" data-testid={inputId}>
@@ -12,6 +17,7 @@ export const InputCheckbox: InputCheckboxComponent = ({ id, checked = false, dis
           "KaizntreeInputCheckbox--label-checked": checked,
           "KaizntreeInputCheckbox--label-disabled": disabled,
         })}
+        htmlFor={inputId}
       />
       <input
         id={inputId}
@@ -19,8 +25,10 @@ export const InputCheckbox: InputCheckboxComponent = ({ id, checked = false, dis
         className="KaizntreeInputCheckbox--input"
         checked={checked}
         disabled={disabled}
-        onChange={() => onChange(!checked)}
+        onChange={(e) => {
+          onChange(e.target.checked);
+        }}
       />
     </div>
-  )
-}
+  );
+};
